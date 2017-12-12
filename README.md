@@ -61,6 +61,17 @@ transfer_output_files   = history.csv
 
 Ya que se deben hacer los ajustes correspondientes en caso que usted modifique el código de `_extract.py` y cambie `history.xml` y `history.csv`.
 
+# Ejecución de DAG
+
+Para simplificar la ejecución de estos scripts se desarrolló un *script* llamado `historyXML2CSV.dag`. 
+La ejecución de este DAG se hace a través del comando
+
+```
+condor_submit_dag historyXML2CSV.dag
+```
+
+Para ejecutarlo de forma exitosa se hace necesario que los archivo .condor (`sFlatCondorXML.condor` y `_extract.condor`) funcionen de forma correcta de manera independiente.
+
 # TAREAS POR HACER
 
 Las siguientes son las listas de tareas que hay pendientes por hacer
