@@ -1,0 +1,3 @@
+JOB flat sFlatCondorXML.condor
+JOB translate _extract.condor
+PARENT flat CHILD translate

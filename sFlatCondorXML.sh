@@ -8,3 +8,4 @@ if [ ! -f ${1} ]; then
 	exit -1
 fi
 time ./flatCondorXML.sh ${1} ${2}
+exit 0
