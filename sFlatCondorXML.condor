@@ -1,9 +1,9 @@
 universe                = vanilla
 executable              = sFlatCondorXML.sh
-arguments               = History.xml histo.xml
+arguments               = History.xml history.xml
 should_transfer_files   = YES
 transfer_input_files    = flatCondorXML.sh,History.xml
-transfer_output_files   = histo.xml
+transfer_output_files   = history.xml
 when_to_transfer_output = ON_EXIT
 request_memory 		= 8192 M
 request_disk 		= 8192 M

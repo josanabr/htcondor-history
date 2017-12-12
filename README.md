@@ -21,16 +21,16 @@ Este comando almacena en `salida.xml` el histórico de todas las tareas que se e
 ## Preprocesamiento
 
 Un problema que se puede presentar con el XML generado en la etapa anterior es que el archivo de salida (`salida.xml`) realmente sea un archivo que contiene muchos archivos XML en su interior. 
-Para convertir todos esos archivos en un solo archivo XML se crea el *script* `flatCondorXML.sh`. 
+Para convertir todos esos archivos en un solo archivo XML se crea el *script* `sFlatCondorXML.sh`. 
 Para ejecutar este *script* se invoca de la siguiente manera:
 
 ```
-$ ./flaCondorXML.sh salida.xml history.xml
+$ ./sFlaCondorXML.sh salida.xml history.xml
 ```
 
 Lo que hace este script es tomar el archivo `salida.xml`, que es un archivo con múltiples XML en su interior, y generar un nuevo archivo `history.xml` quien es realmente un solo archivo XML.
 
-Para ejecutar este script en un cluster de HTCondor se utiliza el archivo `flatCondorXML.condor`. 
+Para ejecutar este script en un cluster de HTCondor se utiliza el archivo `sFlatCondorXML.condor`. 
 
 Los items **IMPORTANTES** de este archivo de HTCondor son:
 
@@ -40,8 +40,8 @@ Los items **IMPORTANTES** de este archivo de HTCondor son:
 
 ## Transformación
 
-Teniendo ya el único archivo XML lo que se hace es convertirlo a un formato mas estandarizado como CSV.
-Este formato es más valioso porque puede ser leido por diversas herramientas que analizan datos como: R y pandas Python.
+Teniendo ya el único archivo XML con  todo lo histórico, lo que se hace es convertirlo a un formato mas estandarizado como CSV.
+Este formato es más relevante porque puede ser leido por diversas herramientas que analizan datos como: R y pandas Python.
 
 Usted puede ejecutar la transformación sin necesidad de HTCondor y puede hacerlo ejecutando el comando
 
@@ -71,7 +71,6 @@ Ya que se deben hacer los ajustes correspondientes en caso que usted modifique e
 
 Las siguientes son las listas de tareas que hay pendientes por hacer
 
-* ~~Crear un *script* para la etapa de preprocesamiento. El objetivo fundamental del *script* es obtener los tiempos de ejecución de la etapa de preprocesamiento.~~ **Revisar la documentación de la etapa de preprocesamiento.**
 * Permitir pasar por parámetros del archivo `_extract.py`: el nombre del archivo XML a ser procesado y el nombre del CSV que almacenará los datos procesados.
 * Crear un archivo *DAG* que permita definir la ejecución del *pipeline*.
 * Crear un *script* que permita generar los .condor y el .dag descritos anteriormente.
