@@ -46,21 +46,15 @@ Este formato es más relevante porque puede ser leido por diversas herramientas 
 Usted puede ejecutar la transformación sin necesidad de HTCondor y puede hacerlo ejecutando el comando
 
 ```
-$ python _extract.py
+$ python _extract.py history.xml history.csv
 ```
 
-Pero para lograr que efectivamente se tomen los archivos que se desean procesar es necesario modificar las líneas del archivo `_extract.py`:
+De acuerdo a lo que hemos visto en este README, `history.xml` corresponde al archivo XML con el histórico de las tareas en HTCondor y `history.csv` será el archivo quedará el contenido en formato CSV.
+
+Usted debe hacer los ajustes correspondientes en el archivo `_extract.condor`, como sigue:
 
 ```
-doc=iterparse('./history.xml',('start','end'))
-csvfile = open('./history.csv',"w")
-```
-
-Particularmente `history.xml` y `history.csv` por el archivo que usted quiere procesar (en este caso `history.xml`) y el archivo donde quiere que quede el contenido en formato CSV (en este caso `history.csv`).
-
-Esta información esta altamente correlacionada con la información que está en el archivo `_extract.condor`, particularmente en las líneas:
-
-```
+arguments		= history.xml history.csv
 transfer_input_files    = _extract.py,history.xml
 transfer_output_files   = history.csv
 ```
@@ -71,7 +65,6 @@ Ya que se deben hacer los ajustes correspondientes en caso que usted modifique e
 
 Las siguientes son las listas de tareas que hay pendientes por hacer
 
-* Permitir pasar por parámetros del archivo `_extract.py`: el nombre del archivo XML a ser procesado y el nombre del CSV que almacenará los datos procesados.
 * Crear un archivo *DAG* que permita definir la ejecución del *pipeline*.
 * Crear un *script* que permita generar los .condor y el .dag descritos anteriormente.
 * Estudiar la librería pandas y validar que tipo de información se puede generar a partir de los datos

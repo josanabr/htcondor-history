@@ -19,6 +19,8 @@
 # - http://chimera.labs.oreilly.com/books/1230000000393/ch06.html#_parsing_huge_xml_files_incrementally
 from xml.etree.ElementTree import iterparse
 import csv
+import sys
+import os.path
 
 # Tags a recolectar
 tags=[
@@ -35,8 +37,19 @@ tags=[
 "DiskUsage" # KB
 ]
 
-doc=iterparse('./history.xml',('start','end'))
-csvfile = open('./history.csv',"w")
+if len(sys.argv) != 3:
+  print("Se requieren dos argumentos, el archivo que tiene el historico en XML y el archivo de salida en CSV")
+  sys.exit(-1)
+
+filenameXML = sys.argv[1]
+if not os.path.isfile(filenameXML):
+  print("No se encontro archivo [%s]"%(filenameXML))
+  sys.exit(-1)
+
+filenameCSV = sys.argv[2]
+
+doc=iterparse(filenameXML,('start','end'))
+csvfile = open(filenameCSV,"w")
 writer = csv.DictWriter(csvfile, fieldnames = tags)
 writer.writeheader()
 # evita el primer encabezado
@@ -213,8 +226,6 @@ for event,elem in doc:
         totalElapsedTime = totalElapsedTime + (completionDate - jobCurrentStartDate)
       if (diskUsageRaw < diskUsage):
         diskUsed = diskUsed + diskUsageRaw
-      #ClusterID ProcessId User ElapsedTime BytesS BytesR DUR DiskUNUsed
-      #print("%s %s %s %s %s %s %s %s"%(clusterId, procId, user, str(completionDate - jobCurrentStartDate), bytesSent, bytesRecv, diskUsageRaw, str(diskUsage - diskUsageRaw)))
       writer.writerow({'User': user, 'ClusterId': clusterId, \
               'ProcId': procId, 'CompletionDate': completionDate, \
               'JobCurrentStartDate': jobCurrentStartDate, \

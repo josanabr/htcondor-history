@@ -1,9 +1,9 @@
 universe                = vanilla
 executable              = _extract.sh
-#arguments               = python _extract.py
-should_transfer_files   = YES
+arguments               = history.xml history.csv
 transfer_input_files    = _extract.py,history.xml
 transfer_output_files   = history.csv
+should_transfer_files   = YES
 when_to_transfer_output = ON_EXIT
 request_memory 		= 8192 M
 request_disk 		= 8192 M
