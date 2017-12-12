@@ -76,6 +76,5 @@ Para ejecutarlo de forma exitosa se hace necesario que los archivo .condor (`sFl
 
 Las siguientes son las listas de tareas que hay pendientes por hacer
 
-* Crear un archivo *DAG* que permita definir la ejecución del *pipeline*.
-* Crear un *script* que permita generar los .condor y el .dag descritos anteriormente.
+* Crear un *script* que permita generar los .condor y el .dag de forma interactiva.
 * Estudiar la librería pandas y validar que tipo de información se puede generar a partir de los datos
